@@ -50,6 +50,7 @@ int _printf(const char *format, ...)
 		}
 		format++;
 	}
+	putchar('\n');
 	va_end(ap);
 	return (printed);
 }
