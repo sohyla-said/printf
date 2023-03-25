@@ -16,9 +16,6 @@ int _printf(const char *format, ...)
 	unsigned int i;
 
 	va_start(ap, format);
-	while (format == NULL)
-		return (-1);
-
 	while (*format != '\0')
 	{
 		if (*format == '%')
@@ -50,7 +47,6 @@ int _printf(const char *format, ...)
 		}
 		format++;
 	}
-	putchar('\n');
 	va_end(ap);
 	return (printed);
 }
