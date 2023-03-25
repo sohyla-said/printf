@@ -4,6 +4,20 @@
 #include <string.h>
 
 /**
+ * print_string - prints a string
+ * @s: an input
+ * Return: nothinh
+ */
+void print_string(char *s)
+{
+	unsigned int i;
+
+	for (i = 0; i < strlen(s); i++)
+	{
+		putchar(s[i]);
+	}
+}
+/**
  * _printf - produces output according to format
  * @format: an input
  * Return: number of printed characters
@@ -13,9 +27,10 @@ int _printf(const char *format, ...)
 	va_list ap;
 	char c, *s;
 	int printed = 0;
-	unsigned int i;
 
 	va_start(ap, format);
+	while (format == NULL)
+		return (-1);
 	while (*format != '\0')
 	{
 		if (*format == '%')
@@ -30,8 +45,7 @@ int _printf(const char *format, ...)
 			else if (*format == 's')
 			{
 				s = va_arg(ap, char*);
-				for (i = 0; i < strlen(s); i++)
-					putchar(s[i]);
+				print_string(s);
 				printed += strlen(s);
 			}
 			else if (*format == '%')
