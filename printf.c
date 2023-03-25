@@ -13,6 +13,7 @@ int _printf(const char *format, ...)
 	va_list ap;
 	char c, *s;
 	int printed = 0;
+	unsigned int i;
 
 	va_start(ap, format);
 	while (format == NULL)
@@ -31,8 +32,9 @@ int _printf(const char *format, ...)
 			}
 			else if (*format == 's')
 			{
-				s = va_arg(ap, char *);
-				puts(s);
+				s = va_arg(ap, char*);
+				for (i = 0; i < strlen(s); i++)
+					putchar(s[i]);
 				printed += strlen(s);
 			}
 			else if (*format == '%')
