@@ -29,9 +29,6 @@ int _printf(const char *format, ...)
 	int printed = 0;
 
 	va_start(ap, format);
-	if ((format[0] == '%' && format[1] == ' ' && !format[2]) ||
-				(!format))
-		return (-1);
 	while (*format != '\0')
 	{
 		if (*format == '%')
