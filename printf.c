@@ -4,20 +4,6 @@
 #include <string.h>
 
 /**
- * print_string - prints a string
- * @s: an input
- * Return: nothinh
- */
-void print_string(char *s)
-{
-	unsigned int i;
-
-	for (i = 0; i < strlen(s); i++)
-	{
-		putchar(s[i]);
-	}
-}
-/**
  * _printf - produces output according to format
  * @format: an input
  * Return: number of printed characters
@@ -25,40 +11,40 @@ void print_string(char *s)
 int _printf(const char *format, ...)
 {
 	va_list ap;
-	char c, *s;
-	int printed = 0;
+	char buff[100] = {0}, *s;
+	int j = 0, i = 0;
 
 	va_start(ap, format);
-	while (*format != '\0')
+	while (format && format[i])
 	{
-		if (*format == '%')
+		if (format[i] == '%')
 		{
-			format++;
-			if (*format == 'c')
+			i++;
+			if (format[i] == 'c')
 			{
-				c = (char) va_arg(ap, int);
-				putchar(c);
-				printed++;
+				buff[j] = (char) va_arg(ap, int);
+				j++;
 			}
-			else if (*format == 's')
+			else if (format[i] == 's')
 			{
-				s = va_arg(ap, char*);
-				print_string(s);
-				printed += strlen(s);
+				s = va_arg(ap, char *);
+				strcpy(&buff[j], s);
+				j += strlen(s);
 			}
-			else if (*format == '%')
+			else if (format[i] == '%')
 			{
-				putchar('%');
-				printed++;
+				buff[j] = '%';
+				j++;
 			}
 		}
 		else
 		{
-			putchar(*format);
-			printed++;
+			buff[j] = format[i];
+			j++;
 		}
-		format++;
+		i++;
 	}
+	fwrite(buff, j, 1, stdout);
 	va_end(ap);
-	return (printed);
+	return (j);
 }
